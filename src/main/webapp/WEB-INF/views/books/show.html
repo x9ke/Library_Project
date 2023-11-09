@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Человек</title>
+</head>
+<body>
+<p th:text = "${book.getBookName() + ',' + book.getBookAuthor()}">VALUE</p>
+<p th:text = "${book.getBookAuthor()}">VALUE</p>
+<p th:text = "${book.getBookYear()}">VALUE</p>
+
+
+<br/>
+<hr/>
+
+<label for="person">choose</label>
+<select th:object="${person}" th:field="*{personId}" id="person">
+    <option  th:each="person : ${people}" th:value="${person.getPersonId()}"
+             th:text="${person.getPersonName()}"></option>
+
+</select>
+<br/>
+<hr/>
+
+
+<a th:href="@{/books/{id}/edit(id=${book.getBookId()})}">
+
+    <input type="submit" value="Edit"/>
+
+</a>
+
+<hr/>
+
+
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getBookId()})}">
+
+    <input type="submit" value="Delete"/>
+
+</form>
+</body>
+</html>
